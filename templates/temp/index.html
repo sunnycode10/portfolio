@@ -6,9 +6,28 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>SunnyCode Portfolio</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title>{{ hero.title|default:"SunnyCode - Portfolio" }}</title>
+    <meta name="description" content="{{ about.bio|striptags|truncatechars:160 }}">
+    <meta name="author" content="SunnyCode">
+    <meta name="keywords" content="Portfolio, Software Engineer, Django, React, SunnyCode, Developer">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title" content="{{ hero.title|default:"SunnyCode - Portfolio" }}">
+    <meta property="og:description" content="{{ about.bio|striptags|truncatechars:160 }}">
+    {% if about.profile_image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ about.profile_image.url }}">
+    {% endif %}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+    <meta property="twitter:title" content="{{ hero.title|default:"SunnyCode - Portfolio" }}">
+    <meta property="twitter:description" content="{{ about.bio|striptags|truncatechars:160 }}">
+    {% if about.profile_image %}
+    <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ about.profile_image.url }}">
+    {% endif %}
 
     <!-- mobile specific metas
     ================================================== -->
@@ -28,7 +47,7 @@
     ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'temp/images/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'temp/images/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'temp/images/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'temp/favicon.ico' %}">
     <link rel="manifest" href="{% static 'temp/images/site.webmanifest' %}">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -53,8 +72,8 @@
     <header class="s-header">
 
         <div class="header-logo">
-            <a href="index.html">
-                <img src="{% static 'temp/images/logo.svg' %}" alt="Homepage">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'temp/images/logo2.svg' %}" alt="Homepage">
             </a>
         </div>
 
@@ -83,7 +102,7 @@
 
     <!-- hero
     ================================================== -->
-    <section id="hero" class="s-hero target-section" data-parallax="scroll" data-image-src="{% static 'temp/images/hero-bg-3000.jpg' %}" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+    <section id="hero" class="s-hero target-section" data-parallax="scroll" data-image-src="{% static 'temp/images/hero-bg-3000.png' %}" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
 
         <div class="row hero-content">
 
